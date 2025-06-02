@@ -1,0 +1,364 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Tu API RESTful",
+    "version": "1.0.0",
+    "description": "Documentación del método GET para el recurso de servicios."
+  },
+  "servers": [
+  {
+    "url": "http://localhost/tejelanas/backend/api",
+    "description": "Servidor de desarrollo"
+  }
+],
+  "security": [
+  {
+    "bearerAuth": []
+  }
+],
+  "paths": {
+  "/v1/products-services": {
+    "get": {
+      "summary": "Obtiene la lista de todos los servicios.",
+      "description": "Retorna un array de objetos de servicio. Esta operación está sujeta a limitaciones de tasa.",
+      "responses": {
+        "200": {
+          "description": "Operación exitosa.",
+          "headers": {
+            "X-RateLimit-Limit": {
+              "schema": { "type": "integer", "description": "El límite de peticiones por hora." },
+              "example": 100
+            },
+            "X-RateLimit-Remaining": {
+              "schema": { "type": "integer", "description": "El número de peticiones restantes en la hora actual." },
+              "example": 95
+            },
+            "X-RateLimit-Reset": {
+              "schema": { "type": "integer", "description": "El timestamp Unix en el que el límite de peticiones se reiniciará." },
+              "example": 1653571200
+            },
+            "Cache-Control": {
+              "schema": { "type": "string", "description": "Directivas de control de caché." },
+              "example": "public, max-age=3600"
+            },
+            "ETag": {
+              "schema": { "type": "string", "description": "Etiqueta de entidad para la validación de caché." },
+              "example": "W/\"abcdef12345\""
+            }
+          },
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/Servicio" }
+              },
+              "example": [
+                { "id": 1, "nombre": "Consultoría Inicial", "descripcion": "Evaluación inicial de las necesidades del cliente." },
+                { "id": 2, "nombre": "Desarrollo de Estrategia", "descripcion": "Creación de un plan estratégico personalizado." }
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Error interno del servidor.",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Error" },
+              "example": { "mensaje": "Error al conectar con la base de datos." }
+            }
+          }
+        }
+      }
+    },
+    "post": {
+      "summary": "Crea un nuevo servicio.",
+      "description": "Agrega un nuevo servicio al sistema.",
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Servicio" },
+            "example": { "nombre": "Nuevo Servicio", "descripcion": "Descripción del nuevo servicio." }
+          }
+        }
+      },
+      "responses": {
+        "201": {
+          "description": "Servicio creado exitosamente.",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Servicio" },
+              "example": { "id": 3, "nombre": "Nuevo Servicio", "descripcion": "Descripción del nuevo servicio." }
+            }
+          }
+        },
+        "400": {
+          "description": "Solicitud inválida.",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Error" },
+              "example": { "mensaje": "Datos inválidos para crear el servicio." }
+            }
+          }
+        },
+        "500": {
+          "description": "Error interno del servidor.",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Error" },
+              "example": { "mensaje": "Error al crear el servicio." }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/v1/products-services/{id}": {
+    "get": {
+      "summary": "Obtiene un servicio por su ID.",
+      "description": "Retorna los detalles de un servicio específico.",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "description": "ID del servicio a obtener.",
+          "schema": { "type": "integer" }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Servicio encontrado.",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Servicio" },
+              "example": { "id": 1, "nombre": "Consultoría Inicial", "descripcion": "Evaluación inicial de las necesidades del cliente." }
+            }
+          }
+        },
+        "404": {
+          "description": "Servicio no encontrado.",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Error" },
+              "example": { "mensaje": "Servicio no encontrado." }
+            }
+          }
+        },
+        "500": {
+          "description": "Error interno del servidor.",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Error" },
+              "example": { "mensaje": "Error al obtener el servicio." }
+            }
+          }
+        }
+      }
+    },
+    "put": {
+      "summary": "Actualiza un servicio existente.",
+      "description": "Modifica los datos de un servicio identificado por su ID.",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "description": "ID del servicio a actualizar.",
+          "schema": { "type": "integer" }
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Servicio" },
+            "example": { "nombre": "Servicio Actualizado", "descripcion": "Descripción actualizada del servicio." }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Servicio actualizado exitosamente.",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Servicio" },
+              "example": { "id": 1, "nombre": "Servicio Actualizado", "descripcion": "Descripción actualizada del servicio." }
+            }
+          }
+        },
+        "400": {
+          "description": "Solicitud inválida.",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Error" },
+              "example": { "mensaje": "Datos inválidos para actualizar el servicio." }
+            }
+          }
+        },
+        "404": {
+          "description": "Servicio no encontrado.",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Error" },
+              "example": { "mensaje": "Servicio no encontrado." }
+            }
+          }
+        },
+        "500": {
+          "description": "Error interno del servidor.",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Error" },
+              "example": { "mensaje": "Error al actualizar el servicio." }
+            }
+          }
+        }
+      }
+    },
+    "delete": {
+      "summary": "Elimina un servicio.",
+      "description": "Elimina un servicio identificado por su ID.",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "description": "ID del servicio a eliminar.",
+          "schema": { "type": "integer" }
+        }
+      ],
+      "responses": {
+        "204": { "description": "Servicio eliminado exitosamente. No retorna contenido." },
+        "404": {
+          "description": "Servicio no encontrado.",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Error" },
+              "example": { "mensaje": "Servicio no encontrado." }
+            }
+          }
+        },
+        "500": {
+          "description": "Error interno del servidor.",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Error" },
+              "example": { "mensaje": "Error al eliminar el servicio." }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/v1/about-us": {
+    "get": {
+      "summary": "Información sobre Tejelanas Vivi",
+      "description": "Devuelve información sobre el emprendimiento Tejelanas Vivi.",
+      "responses": {
+        "200": {
+          "description": "Información obtenida correctamente.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "titulo": { "type": "string" },
+                  "descripcion": { "type": "string" }
+                }
+              },
+              "example": {
+                "titulo": "Sobre Tejelanas Vivi",
+                "descripcion": "Emprendimiento dedicado a la venta de insumos para tejido y organización de talleres en Laguna de Zapallar."
+              }
+            }
+          }
+        },
+        "401": { "description": "No autorizado." }
+      }
+    }
+  },
+  "/v1/faq": {
+    "get": {
+      "summary": "Preguntas frecuentes",
+      "description": "Devuelve una lista de preguntas frecuentes sobre Tejelanas Vivi.",
+      "responses": {
+        "200": {
+          "description": "Preguntas frecuentes obtenidas correctamente.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "pregunta": { "type": "string" },
+                    "respuesta": { "type": "string" }
+                  }
+                }
+              },
+              "example": [
+                {
+                  "pregunta": "¿Realizan envíos?",
+                  "respuesta": "Sí, a Santiago y regiones de Chile a través de Starken y Chilexpress."
+                },
+                {
+                  "pregunta": "¿Dónde están ubicados?",
+                  "respuesta": "En Laguna de Zapallar."
+                }
+              ]
+            }
+          }
+        },
+        "401": { "description": "No autorizado." }
+      }
+    }
+  }
+},
+  "components": {
+  "securitySchemes": {
+    "bearerAuth": {
+      "type": "http",
+      "scheme": "bearer",
+      "bearerFormat": "JWT"
+    }
+  },
+    "schemas": {
+      "Servicio": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID único del servicio.",
+            "readOnly": true
+          },
+          "nombre": {
+            "type": "string",
+            "description": "Nombre del servicio."
+          },
+          "descripcion": {
+            "type": "string",
+            "description": "Descripción del servicio."
+          }
+        },
+        "required": [
+          "id",
+          "nombre",
+          "descripcion"
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "mensaje": {
+            "type": "string",
+            "description": "Mensaje de error."
+          }
+        },
+        "required": [
+          "mensaje"
+        ]
+      }
+    }
+  }
+}

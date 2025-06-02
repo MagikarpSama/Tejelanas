@@ -1,0 +1,264 @@
+{
+	"info": {
+		"_postman_id": "e3655dee-75f5-463e-b182-b7e3ad2ed33c",
+		"name": "Tejelanas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44231025",
+		"_collection_link": "https://daniel-3504112.postman.co/workspace/43088aa4-437b-4ffd-8314-258be220c294/collection/44231025-e3655dee-75f5-463e-b182-b7e3ad2ed33c?action=share&source=collection_link&creator=44231025"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Respuesta GET products-services",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ipss.get",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/tejelanas/backend/api/v1/products-services",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tejelanas",
+						"backend",
+						"api",
+						"v1",
+						"products-services"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Respuesta GET products-services/ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ipss.get",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/tejelanas/backend/api/v1/products-services/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tejelanas",
+						"backend",
+						"api",
+						"v1",
+						"products-services",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Respuesta POST products-services",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ipss.get",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Nuevo Producto de Prueba\",\r\n  \"descripcion\": \"Este es un producto creado desde Postman para probar la API\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/tejelanas/backend/api/v1/products-services",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tejelanas",
+						"backend",
+						"api",
+						"v1",
+						"products-services"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Respuesta PUT products-services",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ipss.get",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Producto Actualizado\",\r\n  \"descripcion\": \"Esta es la nueva descripción del producto actualizado desde Postman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/tejelanas/backend/api/v1/products-services/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tejelanas",
+						"backend",
+						"api",
+						"v1",
+						"products-services",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Respuesta DELETE products-services",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ipss.get",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/tejelanas/backend/api/v1/products-services/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tejelanas",
+						"backend",
+						"api",
+						"v1",
+						"products-services",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Respuesta GET about-us",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ipss.get",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/tejelanas/backend/api/v1/about-us",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tejelanas",
+						"backend",
+						"api",
+						"v1",
+						"about-us"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Respuesta GET faq",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ipss.get",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/tejelanas/backend/api/v1/faq",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tejelanas",
+						"backend",
+						"api",
+						"v1",
+						"faq"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
