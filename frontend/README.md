@@ -2,6 +2,16 @@
 
 Este frontend es la interfaz web del proyecto **Tejelanas**, diseñado para mostrar servicios/productos, información institucional y preguntas frecuentes, y permitir el contacto con el emprendimiento. Utiliza HTML, CSS, JavaScript (con [Vue 3](https://vuejs.org/)), Bootstrap y SwiperJS.
 
+## Guía de Buenas Prácticas
+
+- Usa nombres descriptivos y en inglés para variables y componentes.
+- Estructura los archivos por funcionalidad (componentes, assets, páginas).
+- Aplica validación en todos los formularios (cliente y servidor).
+- Usa etiquetas semánticas y atributos ARIA para accesibilidad.
+- Mantén el código modular y reutilizable.
+- Realiza commits frecuentes y descriptivos.
+- Utiliza ramas para nuevas funcionalidades y revisa el código antes de fusionar.
+
 ## Estructura de Carpetas
 
 ```
@@ -83,3 +93,4 @@ El frontend consume la API RESTful del backend a través de `proxy.php` para obt
 - El frontend está preparado para integrarse fácilmente con el backend y puede adaptarse a nuevas funcionalidades.
 - Para pruebas locales, asegúrate de que el backend esté corriendo y accesible desde el navegador.
 
+##Repositorio https://github.com/MagikarpSama/Tejelanas

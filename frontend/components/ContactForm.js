@@ -7,6 +7,7 @@ app.component('contact-form', {
       email: '',
       mensaje: '',
       producto: this.product || '',
+      fakeCaptcha: '', // Campo para la pregunta de seguridad
       enviado: false,
       error: ''
     }
@@ -20,6 +21,11 @@ app.component('contact-form', {
     enviar() {
       if (!this.nombre || !this.email || !this.mensaje) {
         this.error = 'Por favor, completa todos los campos.';
+        return;
+      }
+      // Validación simple de reCAPTCHA simulado
+      if (this.fakeCaptcha.trim() !== '7') {
+        this.error = 'Por favor, responde correctamente la pregunta de seguridad.';
         return;
       }
       this.enviado = true;
@@ -37,9 +43,9 @@ app.component('contact-form', {
               <input type="text" v-model="nombre" class="form-control" required />
             </div>
             <div class="mb-3">
-      <label for="telefono" class="form-label">Teléfono</label>
-      <input type="tel" class="form-control" id="telefono" v-model="telefono" placeholder="Ej: +56912345678" required>
-    </div>
+              <label for="telefono" class="form-label">Teléfono</label>
+              <input type="tel" class="form-control" id="telefono" v-model="telefono" placeholder="Ej: +56912345678" required>
+            </div>
             <div class="mb-3">
               <label class="form-label">Email</label>
               <input type="email" v-model="email" class="form-control" required />
@@ -51,6 +57,11 @@ app.component('contact-form', {
             <div class="mb-3">
               <label class="form-label">Mensaje</label>
               <textarea v-model="mensaje" class="form-control" rows="4" required></textarea>
+            </div>
+            <!-- Simulación de reCAPTCHA -->
+            <div class="mb-3">
+              <label for="fake-captcha" class="form-label">¿Cuánto es 3 + 4?</label>
+              <input type="text" id="fake-captcha" v-model="fakeCaptcha" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-danger w-100">Enviar</button>
             <p v-if="error" class="text-danger mt-2 text-center">{{ error }}</p>
